@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5799960435684351233}
   - component: {fileID: 1903599643860506405}
   - component: {fileID: 7698617031936397864}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GreenCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

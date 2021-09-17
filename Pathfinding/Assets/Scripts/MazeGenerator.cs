@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour
 {
-    int mazeWidth = 22;
-    int mazeDepth = 19;
+    public int mazeWidth = 22;
+    public int mazeDepth = 19;
+   // public Vector3[] tiles;
+   // int tilesCont = 0;
 
-    int[,] maze = new int[19, 22] {
+   public int[,] maze = new int[19, 22] {
 { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 { 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
 { 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1 },
@@ -37,8 +39,10 @@ public class MazeGenerator : MonoBehaviour
     float xi = -25.0f;
     float zi = 25.0f;
 
+
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         for (int i=0; i<mazeDepth; i++) //z
         {
@@ -51,8 +55,11 @@ public class MazeGenerator : MonoBehaviour
 
                 GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
                 
+               // tiles[tilesCont] = p;
+               // tilesCont = tilesCont + 1;
             }
         }
+
     }
 
     // Update is called once per frame
@@ -60,4 +67,5 @@ public class MazeGenerator : MonoBehaviour
     {
         
     }
+
 }
