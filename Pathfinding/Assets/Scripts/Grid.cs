@@ -4,43 +4,43 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    public Transform StartPosition;
-    public LayerMask WallMask;
-    public Vector2 gridWorldSize;
-    public float nodeRadius;
-    public float Distance;
+    public Transform StartPosition; //Posição inicial do pathfinding
+    public LayerMask WallMask; //layer mask das paredes
+    public Vector2 gridWorldSize; //dimensoes do grid em "metros"
+    public float nodeRadius; //raio de cada nodo no grid
+    public float Distance; //distancia entre os nodos
 
-    Node[,] grid;
-    public List<Node> FinalPath;
+    Node[,] grid; //array de nodos
+    public List<Node> FinalPath; //caminho final
 
-    float nodeDiameter;
-    int gridSizeX, gridSizeY;
+    float nodeDiameter; //diametro do nodo, dobro do raio colocado no inspector
+    int gridSizeX, gridSizeY; //dimensões do grid em int
 
     private void Start()
     {
-        nodeDiameter = nodeRadius * 2;
-        gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
-        gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
-        CreateGrid();
+        nodeDiameter = nodeRadius * 2; // calcula o diametro do nodo
+        gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);// dividimos o valor do grid em "metros" pelo tamanho do nodo para obtermos o tamanho do grid em int
+        gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);// dividimos o valor do grid em "metros" pelo tamanho do nodo para obtermos o tamanho do grid em int
+        CreateGrid(); //criação do grid
     }
 
     void CreateGrid()
     {
-        grid = new Node[gridSizeX, gridSizeY];
-        Vector3 bottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward* gridWorldSize.y / 2;
-        for (int x = 0; x < gridSizeX; x++)
+        grid = new Node[gridSizeX, gridSizeY]; //declaração do array de nodos
+        Vector3 bottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 - Vector3.forward* gridWorldSize.y / 2; // método para encontrar a posição no mundo do canto inferiro esquerdo do grid
+        for (int x = 0; x < gridSizeX; x++) //loop do array de nodos
         {
-            for (int y = 0; y < gridSizeY; y++)
+            for (int y = 0; y < gridSizeY; y++) // loop do array de nodos
             {
                 Vector3 worldPoint = bottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-                bool Wall = true;
+                bool Wall = true; //declaro a variável e já marco o nodo como parede
 
-                if (Physics.CheckSphere(worldPoint, nodeRadius, WallMask))
+                if (Physics.CheckSphere(worldPoint, nodeRadius, WallMask)) // verificamos se o nodo não colide com a parede
                 {
-                    Wall = false;
+                    Wall = false; //se não colide, não é uma parede
                 }
 
-                grid[y, x] = new Node(Wall, worldPoint, x, y);
+                grid[x, y] = new Node(Wall, worldPoint, x, y); // crio um novo nodo no array
             }
         }
     }
@@ -132,7 +132,12 @@ public class Grid : MonoBehaviour
 
                 if(FinalPath != null)
                 {
-                    Gizmos.color = Color.red;
+                    if (FinalPath.Contains(node))
+                    {
+                        //Debug.Log("Caminho encontrado");
+                        Gizmos.color = Color.red;
+
+                    }
                 }
 
                 Gizmos.DrawCube(node.Position, Vector3.one * (nodeDiameter - Distance));
