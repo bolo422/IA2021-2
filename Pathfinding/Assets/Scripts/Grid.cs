@@ -19,8 +19,8 @@ public class Grid : MonoBehaviour
     private void Start()
     {
         nodeDiameter = nodeRadius * 2; // calcula o diametro do nodo
-        gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);// dividimos o valor do grid em "metros" pelo tamanho do nodo para obtermos o tamanho do grid em int
-        gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);// dividimos o valor do grid em "metros" pelo tamanho do nodo para obtermos o tamanho do grid em int
+        gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);// divide o valor do grid em "metros" pelo tamanho do nodo para obter o tamanho do grid em int
+        gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);// divide o valor do grid em "metros" pelo tamanho do nodo para obter o tamanho do grid em int
         CreateGrid(); //criação do grid
     }
 
@@ -33,9 +33,9 @@ public class Grid : MonoBehaviour
             for (int y = 0; y < gridSizeY; y++) // loop do array de nodos
             {
                 Vector3 worldPoint = bottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
-                bool Wall = true; //declaro a variável e já marco o nodo como parede
+                bool Wall = true; //declaração de variável e e seta o nodo como parede
 
-                if (Physics.CheckSphere(worldPoint, nodeRadius, WallMask)) // verificamos se o nodo não colide com a parede
+                if (Physics.CheckSphere(worldPoint, nodeRadius, WallMask)) // verifica se o nodo não colide com a parede
                 {
                     Wall = false; //se não colide, não é uma parede
                 }
@@ -45,7 +45,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public Node NodeFromWorldPosition(Vector3 a_WorldPosition)
+    public Node NodeFromWorldPosition(Vector3 a_WorldPosition) //função que calcula e retorna o nodo mais próximo da posição informada
     {
         float xpoint = ((a_WorldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x);
         float ypoint = ((a_WorldPosition.z + gridWorldSize.y / 2) / gridWorldSize.y);
@@ -59,11 +59,13 @@ public class Grid : MonoBehaviour
         return grid[x, y];
     }
 
-    public List<Node> GetNeighboringNodes(Node a_Node)
+    public List<Node> GetNeighboringNodes(Node a_Node) //função que descobre os nodos vizinhos do nodo informado
     {
-        List<Node> NeighboringNodes = new List<Node>();
-        int xCheck;
-        int yCheck;
+        List<Node> NeighboringNodes = new List<Node>(); //lista dos vizinhos
+        int xCheck; //variável que verifica se a posiçao está dentro do alcançe do array para evitar falha nos indíces
+        int yCheck; //variável que verifica se a posiçao está dentro do alcançe do array para evitar falha nos indíces
+
+        //Os quatro lados abaixo fazem a verificação se está dentro do alcance e depois coloca, o nodo como vizinho
 
         //Right Side
         xCheck = a_Node.gridX + 1;
@@ -109,7 +111,7 @@ public class Grid : MonoBehaviour
             }
         }
 
-        return NeighboringNodes;
+        return NeighboringNodes; //retorna a lista de vizinhos
     }
 
 
