@@ -5,3 +5,4 @@
 
 #Exercício 2: Rato e o labirinto
 	> Este exercício está nos 3 scripts "Grid.cs" "Node.cs" e "Pathfinding.cs"   PS: Não confundir com o "Pathfollowing.cs"!
+	> Para uma versão com mais recursos, como diagonais e movimento do jogador, tenho outro repositório do projeto de RTS que estou fazendo > https://github.com/bolo422/proj-RTS-Erick
