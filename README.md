@@ -10,4 +10,4 @@
 	
 	> Para uma versão com mais recursos, como diagonais e movimento do jogador, tenho outro repositório do projeto de RTS que estou fazendo
 	
-	>  <https://github.com/bolo422/proj-RTS-Erick>
+	>  [Projeto RTS]: https://github.com/bolo422/proj-RTS-Erick
